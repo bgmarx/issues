@@ -16,11 +16,11 @@ defmodule Issues.Router do
   scope "/", Issues do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Issues do
-  #   pipe_through :api
-  # end
+  #Other scopes may use custom stacks.
+  scope "/api", Issues do
+    pipe_through :api
+    resources "/issues", IssueController, except: [:new, :edit]
+  end
 end

@@ -9,7 +9,7 @@ defmodule Issues.IssueController do
   end
 
   def project_issues(conn, %{"project_name" => project_name, "repo_name" => repo_name}) do
-    {:ok, response} = HTTPoison.get("https://api.github.com/repos/" <> project_name <> "/" <> repo_name <> "/issues")
+    response = Issues.IssueFetcher.fetch_issues(project_name, repo_name)
     case response.status_code do
       200 ->
         issues = Poison.decode!(response.body)
@@ -21,7 +21,7 @@ defmodule Issues.IssueController do
   end
 
   def project_issue(conn, %{"project_name" => project_name, "repo_name" => repo_name, "issue_id" => issue_id}) do
-    {:ok, response} = HTTPoison.get("https://api.github.com/repos/" <> project_name <> "/" <> repo_name <> "/issues/" <> issue_id)
+    response = Issues.IssueFetcher.fetch_issue(project_name, repo_name, issue_id)
     case response.status_code do
       200 ->
         issue = Poison.decode!(response.body)

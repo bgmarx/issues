@@ -14,6 +14,7 @@ defmodule Issues do
       supervisor(Issues.Endpoint, []),
       # Start your own worker by calling: Issues.Worker.start_link(arg1, arg2, arg3)
       # worker(Issues.Worker, [arg1, arg2, arg3]),
+#      worker(Issues.IssuesMonitor, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

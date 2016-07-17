@@ -22,5 +22,9 @@ defmodule Issues.Router do
   scope "/api", Issues do
     pipe_through :api
     resources "/issues", IssueController, except: [:new, :edit]
+
+    get "/project_issues/:project_name/:repo_name", IssueController, :project_issues
+
+    get "/project_issues/:project_name/:repo_name/issues/:issue_id", IssueController, :project_issue
   end
 end

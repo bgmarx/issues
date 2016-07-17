@@ -20,6 +20,7 @@ defmodule Issues.Mixfile do
     [mod: {Issues, []},
      applications: [:cowboy,
                     :gettext,
+                    :httpoison,
                     :logger,
                     :phoenix,
                     :phoenix_ecto,
@@ -38,6 +39,7 @@ defmodule Issues.Mixfile do
   defp deps do
     [{:cowboy, "~> 1.0"},
      {:gettext, "~> 0.11"},
+     {:httpoison, "~> 0.9.0"},
      {:phoenix, "~> 1.2.0"},
      {:phoenix_ecto, "~> 3.0"},
      {:phoenix_html, "~> 2.6"},

@@ -2,7 +2,7 @@ defmodule Issues.IssueControllerTest do
   use Issues.ConnCase
 
   alias Issues.Issue
-  @valid_attrs %{id: 42, issue_number: 42, locked: true, repo_url: "some content", state: "some content", title: "some content", url: "some content", user_id: 42, username: "some content"}
+  @valid_attrs %{issue_id: 42, issue_number: 42, locked: true, repo_url: "some content", state: "some content", title: "some content", url: "some content", user_id: 42, username: "some content"}
   @invalid_attrs %{}
 
   setup %{conn: conn} do

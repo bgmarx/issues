@@ -20,7 +20,8 @@ defmodule Issues.Issue do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:url, :repo_url, :id, :issue_number, :title, :state, :locked, :username, :user_id])
-    |> validate_required([:url, :repo_url, :id, :issue_number, :title, :state, :locked, :username, :user_id])
+    |> cast(params, [:url, :repo_url, :issue_id, :issue_number, :title, :state, :locked, :username, :user_id])
+    |> validate_required([:url, :repo_url, :issue_id, :issue_number, :title, :state, :locked, :username, :user_id])
+    |> validate_length(:username, min: 3)
   end
 end

@@ -9,6 +9,9 @@ defmodule Issues.Mixfile do
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+      preferred_cli_env: [
+        vcr: :test, "vcr.delete": :test, "vcr.check": :test, "vcr.show": :test
+      ],
      aliases: aliases(),
      deps: deps()]
   end
@@ -38,6 +41,7 @@ defmodule Issues.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [{:cowboy, "~> 1.0"},
+     {:exvcr, "~> 0.7", only: :test},
      {:gettext, "~> 0.11"},
      {:httpoison, "~> 0.9.0"},
      {:phoenix, "~> 1.2.0"},

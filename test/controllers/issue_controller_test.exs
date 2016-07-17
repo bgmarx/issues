@@ -1,11 +1,15 @@
 defmodule Issues.IssueControllerTest do
   use Issues.ConnCase
+  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   alias Issues.Issue
   @valid_attrs %{issue_id: 42, issue_number: 42, locked: true, repo_url: "some content", state: "some content", title: "some content", url: "some content", user_id: 42, username: "some content"}
   @invalid_attrs %{}
 
   setup %{conn: conn} do
+    ExVCR.Config.cassette_library_dir("test/fixture/vcr_cassettes",
+                                      "test/fixture/custom_cassettes")
+    HTTPoison.start
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
@@ -64,5 +68,13 @@ defmodule Issues.IssueControllerTest do
     conn = delete conn, issue_path(conn, :delete, issue)
     assert response(conn, 204)
     refute Repo.get(Issue, issue.id)
+  end
+
+  test "get issues" do
+    use_cassette "get_issues" do
+      conn = get conn, issue_path(conn, :project_issues, "elixir-lang", "elixir")
+      # update response
+      assert json_response(conn, 200)
+    end
   end
 end

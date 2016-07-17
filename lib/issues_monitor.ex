@@ -30,7 +30,7 @@ defmodule Issues.IssuesMonitor do
       true -> :ok
       false ->
         changeset = Issues.Issue.changeset(issue, fetched_issue)
-        case Repo.insert(changeset) do
+        case Repo.update(changeset) do
           {:ok, _issue} ->
             :ok
           {:error, changeset} ->

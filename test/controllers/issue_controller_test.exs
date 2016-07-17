@@ -20,7 +20,7 @@ defmodule Issues.IssueControllerTest do
     assert json_response(conn, 200)["data"] == %{"id" => issue.id,
       "url" => issue.url,
       "repo_url" => issue.repo_url,
-      "id" => issue.id,
+      "issue_id" => issue.issue_id,
       "issue_number" => issue.issue_number,
       "title" => issue.title,
       "state" => issue.state,
